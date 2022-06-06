@@ -1,4 +1,4 @@
 # ML 
 Working: 
-* Bartosz krawiec
+* Bartosz Krawiec
 * Weronika Materna
