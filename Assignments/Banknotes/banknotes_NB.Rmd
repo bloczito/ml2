@@ -217,8 +217,10 @@ confusion_matrix(lbls_train, pdf_counterfeit_cond2(data_train[f1], data_train[f2
 tn2, fp2, fn2, tp2 = confusion_matrix(lbls_test, pdf_counterfeit_cond2(data_test[f1], data_test[f2]) > 0.5).ravel()
 p2 = tp2 + fn2
 n2 = tn2 + fp2
-tpr_test2 = tp / p2
-fpr_test2 = fp / n2
+tpr_test2 = tp2 / p2
+fpr_test2 = fp2 / n2
+
+
 confusion_matrix(lbls_test, pdf_counterfeit_cond2(data_test[f1], data_test[f2]) > 0.5, normalize="true")
 ```
 

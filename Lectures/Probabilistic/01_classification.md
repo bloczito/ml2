@@ -42,7 +42,7 @@ plt.rcParams["figure.figsize"] = [fig_width, fig_height] #Setting the default fi
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-Actually most of the machine learning methods are "probability based". For example consider the  classification problem. We have an _exemplar_ with some features $d$ and we want to decide to which class $c$ it belong. One way of solving this problem is to calculate the conditional probability 
+Actually most of the machine learning methods are "probability based". For example consider the  classification problem. We have an _exemplar_ with some features $d$ and we want to decide to which class $c$ it belong. One way of solving this problem is to calculate the conditional probability
 
 +++ {"slideshow": {"slide_type": "fragment"}, "tags": []}
 
@@ -50,11 +50,11 @@ $$P(C = c|D = d) $$
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-that given the features  $d$ the class is $c$. 
+that given the features  $d$ the class is $c$.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-It is more useful to talk  about the probability then  a deterministic  classifier function such that $f(d)=c$. In most real life scenarios such function just does not exists. E.g. when approving a loan we have no way of knowing for certain that particular person will repay or not his loan regardless of the information we have on him. We can only  to some degree estimate the probability of that event. If have a reliable estimate of this conditional probability we can use it to make decision(clasification) but  e.g. choose the amount of risk we are willing to take. 
+It is more useful to talk  about the probability then  a deterministic  classifier function such that $f(d)=c$. In most real life scenarios such function just does not exists. E.g. when approving a loan we have no way of knowing for certain that particular person will repay or not his loan regardless of the information we have on him. We can only  to some degree estimate the probability of that event. If have a reliable estimate of this conditional probability we can use it to make decision(clasification) but  e.g. choose the amount of risk we are willing to take.
 
 +++ {"slideshow": {"slide_type": "slide"}, "tags": []}
 
@@ -87,7 +87,7 @@ In practice it is often easier to use the Bayes theorem
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
-$$\boxed{P(C=c|D=d) = \frac{P(D=d|C)P(C=c)}{P(D=d)}= \frac{P(D=d|C=c)P(C=c)}{\sum_c P(D=d|C=c)P(C=c)}}$$ 
+$$\boxed{P(C=c|D=d) = \frac{P(D=d|C)P(C=c)}{P(D=d)}= \frac{P(D=d|C=c)P(C=c)}{\sum_c P(D=d|C=c)P(C=c)}}$$
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
@@ -103,7 +103,7 @@ __Sampling distribution__
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-The first factor  when viewed as the function of $d$ is called the _sampling distributions_ as it describes the distribution of samples in class $c$. Knowledge of $P(D=d|C=c)$ is the knowledge of how to generate the data. We can say we have a model of our data generation process. 
+The first factor  when viewed as the function of $d$ is called the _sampling distributions_ as it describes the distribution of samples in class $c$. Knowledge of $P(D=d|C=c)$ is the knowledge of how to generate the data. We can say we have a model of our data generation process.
 
 +++ {"slideshow": {"slide_type": "fragment"}, "tags": []}
 
@@ -111,7 +111,7 @@ __Prior__
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-$P(C=c)$ is an  _a priori_ (prior) probability y of $C=c$ before we gather any data.  That's the knowledge we had about random variable $C$ beforehand. That  usually reflects the frequency of occurence of classes in the data. For example it may be a fraction of people that repay their loans. 
+$P(C=c)$ is an  _a priori_ (prior) probability y of $C=c$ before we gather any data.  That's the knowledge we had about random variable $C$ beforehand. That  usually reflects the frequency of occurence of classes in the data. For example it may be a fraction of people that repay their loans.
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -136,11 +136,11 @@ Please note that for that kind of classifier  we do not need to calculate the de
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-Let's consider classfication of persons as women and men based on their height. 
+Let's consider classfication of persons as women and men based on their height.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-In this case $D$ is the height of a person and we will denote it by $H$,  $C$ is the sex of a person and we will denote it by $S$. 
+In this case $D$ is the height of a person and we will denote it by $H$,  $C$ is the sex of a person and we will denote it by $S$.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": ["text"]}
 
@@ -152,7 +152,7 @@ $$P(H=h|S=s) \sim  \mathcal{N}(\mu_s,\sigma_s)$$
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-I will use $\sim$ symbol to denote that the probability on left-hand side is equal to probability density function (pmf) or probability mass function (pmf) of the distribution on the right-hand side. 
+I will use $\sim$ symbol to denote that the probability on left-hand side is equal to probability density function (pmf) or probability mass function (pmf) of the distribution on the right-hand side.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
@@ -202,7 +202,7 @@ p_M = 0.5
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-Please keep in mind that this has to be adjusted for the particular use case. E.g. it will not be true for students or employes of our faculty. 
+Please keep in mind that this has to be adjusted for the particular use case. E.g. it will not be true for students or employes of our faculty.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
@@ -252,7 +252,7 @@ plt.axhline(0.5, linewidth=1, c='green');
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
 As we have only two classes chosing the class with bigger probability means that we 
-classify a person as woman when this probability is greater then $1/2$. We will show later that this is in some sense optimal threshold.  Solving for that, we obtain that the height threshold is 
+classify a person as woman when this probability is greater then $1/2$. We will show later that this is in some sense optimal threshold.  Solving for that, we obtain that the height threshold is
 
 ```{code-cell} ipython3
 ---
@@ -275,7 +275,7 @@ In other words if our assumptions hold a person lower then 172cm has a greater c
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-How does this probability change when the _a priori_ probabilities are not equal?  Assume that $P(S=f)=1/4$  and $P(S=m)=3/4$ which is probably closer to reality among computer science students. Plot the new $P(f|h)$ together with the old one. What is the  height treshold now? 
+How does this probability change when the _a priori_ probabilities are not equal?  Assume that $P(S=f)=1/4$  and $P(S=m)=3/4$ which is probably closer to reality among computer science students. Plot the new $P(f|h)$ together with the old one. What is the  height treshold now?
 
 +++ {"slideshow": {"slide_type": "skip"}, "tags": []}
 
@@ -301,7 +301,7 @@ def make_pdf_F_cond_h(p_F):
 
 +++ {"tags": ["answer"], "slideshow": {"slide_type": "notes"}}
 
-This function returns another function so it is an example of [_higher order function_](https://en.wikipedia.org/wiki/Higher-order_function). The returned function is actually a [_closure_](https://simple.wikipedia.org/wiki/Closure_(computer_science)) as it remembers (closes over) the value of ```p_F```. 
+This function returns another function so it is an example of [_higher order function_](https://en.wikipedia.org/wiki/Higher-order_function). The returned function is actually a [_closure_](https://simple.wikipedia.org/wiki/Closure_(computer_science)) as it remembers (closes over) the value of ```p_F```.
 
 ```{code-cell} ipython3
 ---
@@ -332,7 +332,7 @@ print(f"{threshold_fac.item():5.1f}cm")
 
 +++ {"tags": ["answer"], "slideshow": {"slide_type": "notes"}}
 
-As the women are now more rare  the treshold is now considerably lower. In extreme case if $P(S=f)=0$, think _e.g._ about all-boy's schools, then whathever  the height of the person, it has to be a man and treshold would be zero. 
+As the women are now more rare  the treshold is now considerably lower. In extreme case if $P(S=f)=0$, think _e.g._ about all-boy's schools, then whathever  the height of the person, it has to be a man and treshold would be zero.
 
 +++ {"slideshow": {"slide_type": "slide"}, "tags": []}
 
@@ -340,7 +340,7 @@ As the women are now more rare  the treshold is now considerably lower. In extre
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-Of course this is very crude classifier. There are tall women and small men and classifier will make errors. Please note that those error are inherent in the problem, height by itself just does not provide enough information. But notion of error  as well as the concept of the  optimal classifier  requires some explanations. This we will discuss in the next section. 
+Of course this is very crude classifier. There are tall women and small men and classifier will make errors. Please note that those error are inherent in the problem, height by itself just does not provide enough information. But notion of error  as well as the concept of the  optimal classifier  requires some explanations. This we will discuss in the next section.
 
 +++ {"slideshow": {"slide_type": "skip"}, "tags": []}
 
@@ -348,7 +348,7 @@ Of course this is very crude classifier. There are tall women and small men and 
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-Our classifier is an example of binary classfier which can have only two outcomes: woman or man. It is customary the refer to those outcomes as positive and negative. 
+Our classifier is an example of binary classfier which can have only two outcomes: woman or man. It is customary the refer to those outcomes as positive and negative.
 
 +++ {"slideshow": {"slide_type": "slide", "slideshow": {"slide_type": "slide"}}}
 
@@ -371,11 +371,11 @@ The performance of the binary classfier can be represented by a matrix, called _
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-The columns of the matrix correspond to real classes and  rows to the outcome of the classifier. On the diagonal we have good clasification: true positives and true negatives. In our example those are women classified as women and men classified as men. 
+The columns of the matrix correspond to real classes and  rows to the outcome of the classifier. On the diagonal we have good clasification: true positives and true negatives. In our example those are women classified as women and men classified as men.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-The off diagonal terms represent misclasification: false positives - men classified as women and false negatives - women classified as men. Please note that those are different types of errors and may have totally different consequences ! _E.g._ In medical tests classifying healthy person as ill has radically different consequence than clasyfying an ill person as healthy. 
+The off diagonal terms represent misclasification: false positives - men classified as women and false negatives - women classified as men. Please note that those are different types of errors and may have totally different consequences ! _E.g._ In medical tests classifying healthy person as ill has radically different consequence than clasyfying an ill person as healthy.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
@@ -383,7 +383,7 @@ False positives are also refered to as **Type I** errors and false negatives as 
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-In the above table I have somewhat missused the notation. The letters P and N  stand not only for "positive" and "negative" but also for the number of positives and negatives. I hope that the meaning will be clear from the context. 
+In the above table I have somewhat missused the notation. The letters P and N  stand not only for "positive" and "negative" but also for the number of positives and negatives. I hope that the meaning will be clear from the context.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
@@ -418,7 +418,7 @@ $$\frac{TP+TN}{P+N}$$
 
 +++ {"slideshow": {"slide_type": "fragment", "slideshow": {"slide_type": "slide"}}}
 
-__Recall__ is another name for true positive rate 
+__Recall__ is another name for true positive rate
 
 +++ {"slideshow": {"slide_type": "slide"}, "tags": []}
 
@@ -426,15 +426,15 @@ __Precision__ is the fraction of true positive cases in all cases classified as 
 
 +++ {"tags": []}
 
-$$\frac{TP}{TP+FP}$$ 
+$$\frac{TP}{TP+FP}$$
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-This can be viewed as the probability that given positive results that examplar is really a positive. 
+This can be viewed as the probability that given positive results that examplar is really a positive.
 
 +++ {"slideshow": {"slide_type": "slide"}, "tags": []}
 
-$\mathbf{F_1}$ score is the harmonic mean  of precision and recall (TPR) 
+$\mathbf{F_1}$ score is the harmonic mean  of precision and recall (TPR)
 
 +++
 
@@ -446,12 +446,12 @@ __Problem__ Medical test
 
 +++ {"tags": []}
 
-Consider a rare disease (1 in 250 persons) and a test that has 0.8 true positive rate and 0.1 false positive rate. 
+Consider a rare disease (1 in 250 persons) and a test that has 0.8 true positive rate and 0.1 false positive rate.
 
 +++ {"tags": []}
 
 __a__) 
-Calculate the accuracy and precision and F1 score of the test . 
+Calculate the accuracy and precision and F1 score of the test .
 
 +++ {"slideshow": {"slide_type": "skip"}, "tags": []}
 
@@ -464,7 +464,7 @@ $$\frac{TP+TN}{P+N} = \frac{TPR\cdot P +TN\cdot N}{P+N} = \frac{TPR\cdot P }{P+N
 
 We know that 
 
-$$TPR=0.8,\quad P(P)=0.004,\quad P(N)=0.996,\quad TNR=(1-FPR)=0.9$$ 
+$$TPR=0.8,\quad P(P)=0.004,\quad P(N)=0.996,\quad TNR=(1-FPR)=0.9$$
 
 ```{code-cell} ipython3
 ---
@@ -481,7 +481,7 @@ TNR = (1-FPR)
 
 +++ {"tags": ["answer"], "slideshow": {"slide_type": "skip"}}
 
-Giving finaly 
+Giving finaly
 
 ```{code-cell} ipython3
 ---
@@ -513,7 +513,7 @@ print("Precision = {:.4f}".format(precision))
 
 +++ {"tags": ["answer"], "slideshow": {"slide_type": "skip"}}
 
-This is not a coincidence that we have obtained same value as in Base Rate Fallacy problem in the probability notebook. Precision is exactly the conditional probability of being a true positive given that the test outcome is positive. 
+This is not a coincidence that we have obtained same value as in Base Rate Fallacy problem in the probability notebook. Precision is exactly the conditional probability of being a true positive given that the test outcome is positive.
 
 +++ {"tags": ["answer"], "slideshow": {"slide_type": "skip"}}
 
@@ -533,7 +533,7 @@ tags: [answer]
 __b__)
 A dishonest lab is selling a test for this disease that  always tests negative and boats of 99.6% accuracy.  
 
-Are they correct? Calculate the TPR, FPR and precision and F1 score  for this test. 
+Are they correct? Calculate the TPR, FPR and precision and F1 score  for this test.
 
 +++ {"slideshow": {"slide_type": "skip"}}
 
@@ -541,7 +541,7 @@ __Answer__
 
 +++ {"tags": ["answer"], "slideshow": {"slide_type": "skip"}}
 
-For this test we have 
+For this test we have
 
 +++ {"tags": ["answer"], "slideshow": {"slide_type": "slide"}}
 
@@ -575,7 +575,7 @@ print("Accuracy = {:.4f}".format(accuracy))
 
 +++ {"tags": ["answer"], "slideshow": {"slide_type": "fragment"}}
 
-Precision 
+Precision
 
 +++ {"tags": ["answer"], "slideshow": {"slide_type": "fragment"}}
 
@@ -583,7 +583,7 @@ $$\frac{0}{0+0}$$
 
 +++ {"tags": ["answer"], "slideshow": {"slide_type": "notes"}}
 
-however is not well defined. By convention we can set it to zero in this case. 
+however is not well defined. By convention we can set it to zero in this case.
 
 +++ {"tags": ["answer"], "slideshow": {"slide_type": "notes"}}
 
@@ -601,11 +601,11 @@ print("F score = {:4.2f}".format(f1_b))
 
 +++ {"slideshow": {"slide_type": "notes"}}
 
-The above examples are meant to warn you about using the accuracy as a metric in case of the dataset with unbalanced classes _i.e._ sets where one class is much less frequent then the rest. 
+The above examples are meant to warn you about using the accuracy as a metric in case of the dataset with unbalanced classes _i.e._ sets where one class is much less frequent then the rest.
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
-## Calculating the errors of our "sex from height" classifier. 
+## Calculating the errors of our "sex from height" classifier.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
@@ -639,7 +639,7 @@ clasification = ( pdf_F_cond(h_FM)>=0.5 )
 
 +++ {"slideshow": {"slide_type": "slide"}, "tags": []}
 
-#### Accuracy 
+#### Accuracy
 
 ```{code-cell} ipython3
 :tags: []
@@ -689,7 +689,7 @@ print(fnr)
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-As you can see the FPR and FNR are not equal. This classifier will more often wrongly classify men as women then  women as men.   
+As you can see the FPR and FNR are not equal. This classifier will more often wrongly classify men as women then  women as men.
 
 +++
 
@@ -725,7 +725,7 @@ ConfusionMatrixDisplay.from_predictions(labels, clasification, display_labels=('
 
 +++ {"slideshow": {"slide_type": "skip"}, "tags": []}
 
-Calculate the precision and $F_1$ score for this classifier. 
+Calculate the precision and $F_1$ score for this classifier.
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -733,7 +733,7 @@ Calculate the precision and $F_1$ score for this classifier.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-We have seen that the performace of a binary classifier can be characterised by two numbers often chosen as true positives rate (TPR) and false positives rate (FPR). Those numbers depend on the treshold used for deciding when to classify somebody as a woman. The choice on 1/2 seems logical and even obvious but as we will see it is optimal only in one case. Chosing a different  treshold will give us different   (TPR, FPR) pair which we can visualize as a point on a plot. Ploting the points for all tresholds gives us so called Receiver Operational Characteristic (ROC) curve. 
+We have seen that the performace of a binary classifier can be characterised by two numbers often chosen as true positives rate (TPR) and false positives rate (FPR). Those numbers depend on the treshold used for deciding when to classify somebody as a woman. The choice on 1/2 seems logical and even obvious but as we will see it is optimal only in one case. Chosing a different  treshold will give us different   (TPR, FPR) pair which we can visualize as a point on a plot. Ploting the points for all tresholds gives us so called Receiver Operational Characteristic (ROC) curve.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
@@ -749,7 +749,7 @@ from sklearn.metrics import roc_curve, roc_auc_score
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-Function [roc_curve](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html) takes as its first argument the  true labels: zeros for negatives and ones for positives. The second argument is the probability of positive outcome calculated for each sample point in the same order as labels. 
+Function [roc_curve](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html) takes as its first argument the  true labels: zeros for negatives and ones for positives. The second argument is the probability of positive outcome calculated for each sample point in the same order as labels.
 
 ```{code-cell} ipython3
 ---
@@ -779,7 +779,7 @@ def roc_plot(figsize=[fig_height,fig_height]):
 
 +++ {"slideshow": {"slide_type": "notes"}}
 
-and  returns three arrays containg false positives rates, true positives rates and thresholds which we will use to plot the curve. 
+and  returns three arrays containg false positives rates, true positives rates and thresholds which we will use to plot the curve.
 
 ```{code-cell} ipython3
 ---
@@ -809,7 +809,7 @@ As we can see we must compromise, the  perfect classfier corresponds to point (0
 
 In extreme cases we may clasify everybody as men. Then FPR = 0 but also TPR = 0. Other extreme would be to classify everybody as women. Then we have TPR = 1 but also FPR = 1. So the ROC curve always start at (0,0) and ends at (1,1). 
 
-The diagonal black line represents random guessing. If you classify somebody randomly as a woman with probability $r$ then true positives rate is also $r$. But so is the false positives rate. This gives as a $(r,r)$ point on the plot. Changing $r$ we can get the whole diagonal. 
+The diagonal black line represents random guessing. If you classify somebody randomly as a woman with probability $r$ then true positives rate is also $r$. But so is the false positives rate. This gives as a $(r,r)$ point on the plot. Changing $r$ we can get the whole diagonal.
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -817,15 +817,15 @@ The diagonal black line represents random guessing. If you classify somebody ran
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-So how do we chose a point on ROC curve ? That depends on our goals, we need some criterion, so let's say we want to minimize the number of misclasifications (or maximize accuracy). 
+So how do we chose a point on ROC curve ? That depends on our goals, we need some criterion, so let's say we want to minimize the number of misclasifications (or maximize accuracy).
 
 +++ {"slideshow": {"slide_type": "skip"}, "tags": []}
 
-From the definitions: 
+From the definitions:
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
-$$FP +FN = FPR\cdot N + FNR\cdot P = FPR\cdot N+ (1-TPR)\cdot P \propto FPR\cdot P(N) + (1-TPR)\cdot P(P) $$ 
+$$FP +FN = FPR\cdot N + FNR\cdot P = FPR\cdot N+ (1-TPR)\cdot P \propto FPR\cdot P(N) + (1-TPR)\cdot P(P) $$
 
 +++ {"slideshow": {"slide_type": "skip"}, "tags": []}
 
@@ -855,7 +855,7 @@ print(imin, thds[imin])
 
 +++ {"slideshow": {"slide_type": "skip"}}
 
-So as expected the optimal treshold is equal to 1/2 (within our Monte-Carlo accuracy). 
+So as expected the optimal treshold is equal to 1/2 (within our Monte-Carlo accuracy).
 
 ```{code-cell} ipython3
 ---
@@ -881,19 +881,19 @@ More often we are interested not so much in accuracy but in total cost of the mi
 
 Imagine for example such scenario: You classify a person and  if you decide it's a woman you invite her to candlelight dinner. If it's a man you invite him for a beer. You live in a rather conservative society where when a man is invited to a candlelight diner  he will knock you teeths off. If you invite a woman for a beer she will slap you. How should you choose a treshold in this case? 
 
-To answer this question you have to  assign a cost to each type of errors. Let's assume that you consider the cost of your teeth as five times bigger then cost of being slapped in the face. Then the expected cost is: 
+To answer this question you have to  assign a cost to each type of errors. Let's assume that you consider the cost of your teeth as five times bigger then cost of being slapped in the face. Then the expected cost is:
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
-$$c_2\cdot FPR\cdot P(P)+ c_1\cdot (1-TPR)\cdot P(N)$$ 
+$$c_2\cdot FPR\cdot P(P)+ c_1\cdot (1-TPR)\cdot P(N)$$
 
 +++ {"slideshow": {"slide_type": "skip"}, "tags": []}
 
-with 
+with
 
 +++ {"slideshow": {"slide_type": "fragment"}, "tags": []}
 
-$$c_2 = 5\quad c_1 = 1$$  
+$$c_2 = 5\quad c_1 = 1$$
 
 +++ {"slideshow": {"slide_type": "skip"}, "tags": []}
 
@@ -934,7 +934,7 @@ ax.scatter([thds[imin_c]], [errs_c[imin_c]], c='red', zorder=2);
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
 Now the treshold is considerably higher. That's logical as mistaking men for women (false positive) is more costly, you want to be more sure that this is a woman before  asking this person out on   date. 
-A look at the ROC curve shows that we have indeed decreased the false positives rate but at the expense of decreasing the true positive rate as well. 
+A look at the ROC curve shows that we have indeed decreased the false positives rate but at the expense of decreasing the true positive rate as well.
 
 ```{code-cell} ipython3
 ---
@@ -951,7 +951,7 @@ ax.legend();
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-Actually we did not need to search  the optimal treshold as above. There is a theorem that states that given the costs the optimal treshold is 
+Actually we did not need to search  the optimal treshold as above. There is a theorem that states that given the costs the optimal treshold is
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -989,7 +989,7 @@ ax.axvline(5/6, zorder=1);
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-which is resonably close to our value. The agreement is not perfect because our calculations were based on finite size sample. 
+which is resonably close to our value. The agreement is not perfect because our calculations were based on finite size sample.
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -1030,7 +1030,7 @@ ax.text(0.7, 0.3, "AUC = %3.2f"%(auc,), fontsize=16 );
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-Properties of the ROC curve imply that for the perfect classifier $AUC=1$ and for random guessing $AUC=0.5$. You can learn more about ROC curves and AUC _e.g._ in [here](https://www.researchgate.net/publication/284001844_Some_mathematical_properties_of_the_ROC_curve_and_their_applications). 
+Properties of the ROC curve imply that for the perfect classifier $AUC=1$ and for random guessing $AUC=0.5$. You can learn more about ROC curves and AUC _e.g._ in [here](https://www.researchgate.net/publication/284001844_Some_mathematical_properties_of_the_ROC_curve_and_their_applications).
 
 +++ {"slideshow": {"slide_type": "slide"}, "tags": []}
 
@@ -1048,11 +1048,11 @@ $$P(D=d|C=c)\quad\text{and}\quad P(C=c)$$
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-so learning amounts to estimating  this distribution from the data. 
+so learning amounts to estimating  this distribution from the data.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
-In our case we just took the numbers provided by the Central Statistical Office and assumed (!) that the underlying distribution was normal. Actually this is not true. What I did was to take the data for persons in the age group 20-29 years. Actually the mean and the stadard deviation depends on the age group  droping _e.g._ to 174cm for men in age group 50-59 years. That means that the overall distribution in  the male population cannot be normal. It could be however a good (or good enough approximation). This is impossible to check without the actual data.  Unfotunately I do not have the access to the original data on which those measurments were based. 
+In our case we just took the numbers provided by the Central Statistical Office and assumed (!) that the underlying distribution was normal. Actually this is not true. What I did was to take the data for persons in the age group 20-29 years. Actually the mean and the stadard deviation depends on the age group  droping _e.g._ to 174cm for men in age group 50-59 years. That means that the overall distribution in  the male population cannot be normal. It could be however a good (or good enough approximation). This is impossible to check without the actual data.  Unfotunately I do not have the access to the original data on which those measurments were based.
 
 +++ {"slideshow": {"slide_type": "notes"}, "tags": []}
 
