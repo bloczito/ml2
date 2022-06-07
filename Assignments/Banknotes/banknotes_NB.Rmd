@@ -219,8 +219,6 @@ p2 = tp2 + fn2
 n2 = tn2 + fp2
 tpr_test2 = tp2 / p2
 fpr_test2 = fp2 / n2
-
-
 confusion_matrix(lbls_test, pdf_counterfeit_cond2(data_test[f1], data_test[f2]) > 0.5, normalize="true")
 ```
 
@@ -236,7 +234,7 @@ roc_auc_score(lbls_test, pdf_counterfeit_cond2(data_test[f1], data_test[f2]))
 fprs2, tprs2, _ = roc_curve(lbls_test, pdf_counterfeit_cond2(data_test[f1], data_test[f2]))
 fprs_test, tprs_test, _ = roc_curve(lbls_test, pdf_counterfeit_cond(data_test.a0))
 
-fig, ax = plt.subplots(figsize=[12, 12])
+fig, ax = plt.subplots(figsize=[10, 15])
 ax.set_aspect(1)
 ax.set_xlabel('FPR')
 ax.set_ylabel('TPR')
@@ -252,8 +250,73 @@ ax.legend()
 
 ## Problem 3
 
+
+Same as Problem 2 but now implement Gaussian Naive Bayes using all features.
+
 ```{python}
+f0="a0"
+f1="a1"
+f2="a2"
+f3="a3"
+
+
+norm_counter_f0 = norm(*norm.fit(data_train[f0][lbls_train == 1]))
+norm_legit_f0 = norm(*norm.fit(data_train[f0][lbls_train == 0]))
+
+norm_counter_f1 = norm(*norm.fit(data_train[f1][lbls_train == 1]))
+norm_legit_f1 = norm(*norm.fit(data_train[f1][lbls_train == 0]))
+
+norm_counter_f2 = norm(*norm.fit(data_train[f2][lbls_train == 1]))
+norm_legit_f2 = norm(*norm.fit(data_train[f2][lbls_train == 0]))
+
+norm_counter_f3 = norm(*norm.fit(data_train[f3][lbls_train == 1]))
+norm_legit_f3 = norm(*norm.fit(data_train[f3][lbls_train == 0]))
 
 ```
 
-Same as Problem 2 but now implement Gaussian Naive Bayes using all features.
+```{python}
+def pdf_counterfeit_cond_all_features(f0, f1, f2, f3):
+    return norm_counter_f0.pdf(f0) * norm_counter_f1.pdf(f1) * norm_counter_f2.pdf(f2) * norm_counter_f3.pdf(f3) * p_counter / \
+           (norm_counter_f0.pdf(f0) * norm_counter_f1.pdf(f1) * norm_counter_f2.pdf(f2)* norm_counter_f3.pdf(f3) * p_counter + norm_legit_f0.pdf(f0) * norm_legit_f1.pdf(f1) * norm_legit_f2.pdf(f2) * norm_legit_f3.pdf(f3) * p_legit)
+```
+
+```{python}
+confusion_matrix(lbls_train, pdf_counterfeit_cond_all_features(data_train[f0], data_train[f1], data_train[f2], data_train[f3]) > 0.5, normalize="true")
+```
+
+```{python}
+tn3, fp3, fn3, tp3 = confusion_matrix(lbls_test, pdf_counterfeit_cond_all_features(data_test[f0], data_test[f1], data_test[f2], data_test[f3]) > 0.5).ravel()
+p3 = tp3 + fn3
+n3 = tn3 + fp3
+tpr_test3 = tp3 / p3
+fpr_test3 = fp3 / n3
+confusion_matrix(lbls_test, pdf_counterfeit_cond_all_features(data_test[f0], data_test[f1], data_test[f2], data_test[f3]) > 0.5, normalize="true")
+```
+
+```{python}
+roc_auc_score(lbls_train, pdf_counterfeit_cond_all_features(data_train[f0], data_train[f1], data_train[f2], data_train[f3] ))
+```
+
+```{python}
+roc_auc_score(lbls_test, pdf_counterfeit_cond_all_features(data_test[f0], data_test[f1], data_test[f2], data_test[f3] ))
+```
+
+```{python}
+fprs3, tprs3, _ = roc_curve(lbls_test, pdf_counterfeit_cond_all_features(data_test[f0], data_test[f1], data_test[f2], data_test[f3]))
+
+fig, ax = plt.subplots(figsize=[12, 12])
+ax.set_aspect(1)
+ax.set_xlabel('FPR')
+ax.set_ylabel('TPR')
+ax.set_title("ROC curve", fontsize=14)
+
+
+roc_test = ax.plot(fprs_test, tprs_test)
+roc_test2 = ax.plot(fprs2, tprs2)
+roc_test3 = ax.plot(fprs3, tprs3)
+
+ax.scatter([fpr_test], [tpr_test], label="One parameter")
+ax.scatter([fpr_test2], [tpr_test2], label="Two parameters")
+ax.scatter([fpr_test3], [tpr_test3], label="Four parameters")
+ax.legend()
+```
