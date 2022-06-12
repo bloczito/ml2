@@ -182,6 +182,7 @@ ax.plot(test_fprs, test_tprs, linewidth=1, label="Test")
 
 ax.scatter([fpr], [tpr])
 ax.scatter([fpr_test], [tpr_test])
+ax.legend();
 ```
 
 ## Problem 2
