@@ -6,4 +6,5 @@ Lectures/Probabilistic/.ipynb_checkpoints/
 *.ipynb
 .idea
 .ipynb_checkpoints
-__pycache__
+
+mchlearn/__pycache__/
