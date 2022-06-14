@@ -71,7 +71,8 @@ confusion_matrix(data_test['counterfeit'], test_proba < 0.5, normalize="true").r
 ```
 
 ```{python}
-roc_auc_score(data_test['counterfeit'], test_proba)
+auc_qda = roc_auc_score(data_test['counterfeit'], test_proba)
+auc_qda
 ```
 
 ```{python}
@@ -147,7 +148,12 @@ confusion_matrix(data_test["counterfeit"], mgd_proba>0.5, normalize='true')
 ```
 
 ```{python}
-fprs_mga, tprs_mga, thds_gma = roc_curve(data_test["counterfeit"], mgd_proba)
+auc_mgd = roc_auc_score(data_test['counterfeit'], mgd_proba)
+auc_mgd
+```
+
+```{python}
+fprs_mgd, tprs_mgd, thds_gma = roc_curve(data_test["counterfeit"], mgd_proba)
 
 fig, ax = roc_plot()
 add_roc_curve(data_test['counterfeit'], test_proba, 'qda', ax);
@@ -205,32 +211,34 @@ best_counter_cmp = GaussianMixture(n_components=max_j, max_iter=100, tol=0.0001)
 ```
 
 ```{python}
-best_legit_cmp = GaussianMixture(n_components=max_i, max_iter=100, tol=0.0001)
-best_counter_cmp = GaussianMixture(n_components=max_j, max_iter=100, tol=0.0001)
+best_legit_cmp.fit(legit_train.loc[:,'a1':'a3'])
+best_counter_cmp.fit(counterfeit_train.loc[:,'a1':'a3']);
 ```
 
 ```{python}
-best_pos_cmp.fit(positive_data)
-best_neg_cmp.fit(negative_data)
+best_mgd_predict_proba = make_predict_proba(best_legit_cmp, best_counter_cmp, 0.5, 0.5)
 ```
 
 ```{python}
-best_mgd_predict_proba = make_predict_proba(best_neg_cmp, best_pos_cmp, 0.66, 0.34)
-best_test_predicted_proba_mga = best_mgd_predict_proba(data_test.iloc[:,0:3])
-pd.DataFrame(confusion_matrix(lbls_test, best_test_predicted_proba_mga>0.5, normalize='true'))
-best_tnr_mga, best_fpr_mga, best_fnr_mga, best_tpr_mga = confusion_matrix(data_test.counterfeit == 1, best_test_predicted_proba_mga>0.5, normalize='true').ravel()
-best_precision_mga = best_tpr_mga / (best_tpr_mga + best_fpr_mga)
-best_recall_mga = best_tpr_mga / (best_tpr_mga + best_fnr_mga)
-best_f1_mga = 2 * (best_precision_mga * best_recall_mga) / (best_precision_mga + best_recall_mga)
-best_auc_mga = roc_auc_score(lbls_test, best_test_predicted_proba_mga)
+best_mgd_proba = best_mgd_predict_proba(data_test.loc[:,"a1":"a3"])
 ```
 
 ```{python}
-
+pd.DataFrame(confusion_matrix(data_test["counterfeit"], best_mgd_proba>0.5, normalize='true'))
 ```
 
 ```{python}
+auc_best_mgd = roc_auc_score(data_test['counterfeit'], best_mgd_proba)
+auc_best_mgd
+```
 
+```{python}
+fprs_best_mgd, tprs_best_mgd, thds_best_gmd = roc_curve(data_test["counterfeit"], best_mgd_proba)
+
+fig, ax = roc_plot()
+add_roc_curve(data_test['counterfeit'], best_mgd_proba, 'best qda', ax);
+add_roc_curve(data_test['counterfeit'], mgd_proba, 'mga', ax);
+ax.legend(title='AUC');
 ```
 
 ## D.  
@@ -239,30 +247,39 @@ best_auc_mga = roc_auc_score(lbls_test, best_test_predicted_proba_mga)
 Assume that 1% of all the customers in your store try to pay with a counterfeit 100PLN bill. If you accept the counterfeit bill you loose 100PLN. If you reject a valid bill,  you may loose the purchase, you estimate this loss as 15PLN on average. For each of the three classifiers find the threshold that minimises your losses and calculates the minimum loss for each classifier. Show the optimal classifiers points on the ROC curves.
 
 ```{python}
-
+def calculate_cost_and_find_min_idx(fprs, fnrs):
+    # cost = 1 * fprs * 100 + 99 * fnrs * 15
+    cost = 1 * fnrs * 100 + 99 * fprs * 15
+    idx = list(cost).index(min(cost))
+    return cost, idx
 ```
 
 ```{python}
-tnr, fpr, fnr, tpr, precision, f1, auc, min_loss, threshold = calculate_optimal(fprs,tprs,thds)
+# fprs_qda - falszywy jako falszywy -> koszt 15
+fnrs_qda = 1 - tprs_qda # fałszywy jako prawdziwy -> koszt 100
+cost_qda, idx_qda = calculate_cost_and_find_min_idx(fprs_qda, fnrs_qda)
+cost_qda[idx_qda]
 ```
 
 ```{python}
-
+fnrs_mgd = 1 - tprs_mgd
+cost_mgd, idx_mgd = calculate_cost_and_find_min_idx(fprs_mgd, fnrs_mgd)
+cost_mgd[idx_mgd]
 ```
 
-also please save the ROC plot
+```{python}
+fnrs_best_mgd = 1 - tprs_best_mgd
+cost_best_mgd, idx_best_mgd = calculate_cost_and_find_min_idx(fprs_best_mga, fnrs_best_mga)
+cost_best_mgd[idx_best_mgd]
+```
 
 ```{python}
 fig, ax = plt.subplots()
-#plot ROCs
-ax.plot([0,1],[0,1]);
-sb.glue('D_ROC',fig, "display", display=False);
-```
+ax.plot(fprs_qda, tprs_qda, label="{:s}  {:2.3f}".format('QDA', auc_qda))
+ax.plot(fprs_mgd, tprs_mgd, label="{:s}  {:2.3f}".format('QDA', auc_mgd))
+ax.plot(fprs_best_mgd, tprs_best_mgd, label="{:s}  {:2.3f}".format('QDA', auc_best_mgd))
 
-```{python}
-
-```
-
-```{python}
-
+ax.scatter(fprs_qda[idx_qda], tprs_qda[idx_qda])
+ax.scatter(fprs_mgd[idx_mgd], tprs_mgd[idx_mgd])
+ax.scatter(fprs_best_mgd[idx_best_mgd], tprs_best_mgd[idx_best_mgd])
 ```
