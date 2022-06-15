@@ -269,7 +269,7 @@ cost_mgd[idx_mgd]
 
 ```{python}
 fnrs_best_mgd = 1 - tprs_best_mgd
-cost_best_mgd, idx_best_mgd = calculate_cost_and_find_min_idx(fprs_best_mga, fnrs_best_mga)
+cost_best_mgd, idx_best_mgd = calculate_cost_and_find_min_idx(fprs_best_mgd, fnrs_best_mgd)
 cost_best_mgd[idx_best_mgd]
 ```
 
