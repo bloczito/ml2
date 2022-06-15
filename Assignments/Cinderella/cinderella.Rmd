@@ -51,16 +51,18 @@ from sklearn.mixture import GaussianMixture
 from sklearn.model_selection import cross_validate
 from sklearn.model_selection import train_test_split
 
+N=15
 data_train, data_test = train_test_split(data, test_size=0.2)
 test_scores = {}
-for element in range(2, 8):
+for element in range(2, N):
     gaussianMix = GaussianMixture(n_components=element, tol=1e-5, n_init=3)
     gaussianMix.fit(data_train)
     cv = cross_validate(gaussianMix, data_train)
     test_scores[element] = (-cv['test_score'].mean())
     print(f"{element} clusters {-cv['test_score'].mean():6.4f}")
 
-print(f"Best score is {min(test_scores, key=test_scores.get)}")
+fig, ax = plt.subplots()
+ax.plot(range(2, N), test_scores.values())
 ```
 
 ### Bonus question
